@@ -16,7 +16,7 @@ _start:
 
 // Setup the parameters to print our hex nmber and then call Linux to do it.
 _print:	mov	x2, x0	// Return code is the length
-	mov	x1, #1	// 1 = stdout
+	mov	x0, #1	// 1 = stdout
 	ldr	x1, =outstr	// string to print
 	mov	x8, #64		// Linux write syscall
 	svc	0		// Call Linux to output the string
