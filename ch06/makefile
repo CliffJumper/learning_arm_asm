@@ -3,8 +3,8 @@ TOOLPATH = /usr/aarch64-linux-gnu/bin
 
 AS = $(TOOLPATH)/as
 LD = $(TOOLPATH)/ld
-SRCS= $(wildcard *.s)
-EXECS=$(SRCS:.s=)
+EXECS = upper
+OBJS = main.o upper.o
 
 
 ifdef DEBUG
@@ -13,13 +13,15 @@ else
 	DEBUGFLGS =
 endif
 
+LSTFLGS = 
+
 all: $(EXECS)
 
-$(EXECS): % : %.o
-	$(TOOLPATH)/ld -o $@ $^
-
 %.o: %.s
-	$(TOOLPATH)/as $(DEBUGFLGS) $< -o $@
+	$(TOOLPATH)/as $(DEBUGFLGS) $(LSTFLGS) $< -o $@
+
+upper:	$(OBJS)
+	$(TOOLPATH)/ld -o $@ $(OBJS)
 
 clean:
 	rm -f $(EXECS) *.o
