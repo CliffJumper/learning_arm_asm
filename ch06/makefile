@@ -1,30 +1,16 @@
-
-TOOLPATH = /usr/bin
-#TOOLPATH = /usr/aarch64-linux-gnu/bin
-
-AS = $(TOOLPATH)/as
-LD = $(TOOLPATH)/ld
-EXECS = upper
-OBJS = main.o upper.o
-
+UPPEROBJS = main.o upper.o
 
 ifdef DEBUG
 	DEBUGFLGS = -g
 else
 	DEBUGFLGS =
 endif
+LSTFLGS =
 
-LSTFLGS = 
+all: upper
 
-all: $(EXECS)
+%.o : %.s
+	as  $(DEBUGFLGS) $(LSTFLGS) $< -o $@
 
-%.o: %.s
-	$(TOOLPATH)/as $(DEBUGFLGS) $(LSTFLGS) $< -o $@
-
-upper:	$(OBJS)
-	$(TOOLPATH)/ld -o $@ $(OBJS)
-
-clean:
-	rm -f $(EXECS) *.o
-
-.PHONY: clean
+upper: $(UPPEROBJS)
+	ld -o upper $(UPPEROBJS)

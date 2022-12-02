@@ -1,5 +1,5 @@
 
-TOOLPATH = /usr/aarch64-linux-gnu/bin
+TOOLPATH = /usr/bin
 
 AS = $(TOOLPATH)/as
 LD = $(TOOLPATH)/ld
