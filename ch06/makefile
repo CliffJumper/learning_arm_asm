@@ -1,4 +1,4 @@
-UPPEROBJS = main.o upper.o
+UPPEROBJS = mainmacro.o upper.o
 
 ifdef DEBUG
 	DEBUGFLGS = -g
@@ -14,3 +14,9 @@ all: upper
 
 upper: $(UPPEROBJS)
 	ld -o upper $(UPPEROBJS)
+
+clean:
+	rm -Rf *.o
+	rm upper
+
+.PHONY: clean
